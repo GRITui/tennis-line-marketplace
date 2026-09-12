@@ -3,12 +3,14 @@ apps/api/.build/
 apps/api/.swiftpm/
 apps/api/*.xcodeproj
 # Node / Next.js
-apps/liff/node_modules/
-apps/liff/.next/
-apps/liff/out/
-apps/admin/node_modules/
-apps/admin/.next/
-apps/admin/out/
+apps/liff-player/node_modules/
+apps/liff-player/.next/
+apps/liff-player/out/
+apps/coach-admin/node_modules/
+apps/coach-admin/.next/
+apps/coach-admin/out/
+apps/middleware/node_modules/
+apps/middleware/dist/
 
 # Env / secrets
 .env

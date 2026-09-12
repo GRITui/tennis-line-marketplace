@@ -20,36 +20,36 @@ jobs:
       - run: swift build
       - run: swift test
 
-  liff:
-    name: LIFF (Next.js)
+  player:
+    name: Player app (Next.js)
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: apps/liff
+        working-directory: apps/liff-player
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: apps/liff/package-lock.json
+          cache-dependency-path: apps/liff-player/package-lock.json
       - run: npm install
       - run: npm run lint
       - run: npm run build
 
-  admin:
-    name: Admin (Next.js)
+  coach:
+    name: Coach app (Next.js)
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: apps/admin
+        working-directory: apps/coach-admin
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: apps/admin/package-lock.json
+          cache-dependency-path: apps/coach-admin/package-lock.json
       - run: npm install
       - run: npm run lint
       - run: npm run build
