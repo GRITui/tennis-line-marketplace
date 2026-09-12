@@ -410,62 +410,49 @@ def arrow(c, x1, y1, x2, y2, color=colors.HexColor("#A9BBAA")):
 def page_simple_workflow(c):
     c.setFillColor(MINT)
     c.rect(0, 0, W, H, fill=1, stroke=0)
-    pill(c, "How Tennis Line works", 54, H - 58)
-    text(c, "One simple loop.\nA better court day.", 54, H - 112, TITLE, 500)
-    text(c, "Players find and book. Coaches open and fill. Tennis Line keeps the experience connected.", 58, H - 220, BODY, 570)
+    pill(c, "MVP workflow skeleton", 54, H - 58)
+    text(c, "The loop, at a glance.", 54, H - 112, TITLE, 520)
 
+    c.setStrokeColor(colors.HexColor("#B7C8B9"))
+    c.setLineWidth(1)
+    c.line(180, 350, 1190, 350)
+    c.line(180, 190, 1190, 190)
     c.setFillColor(GREEN)
     c.setFont("Helvetica-Bold", 11)
-    c.drawString(65, 390, "PLAYER")
-    c.setFillColor(MID)
-    c.setFont("Helvetica", 9)
-    c.drawString(65, 374, "The person looking to play")
+    c.drawString(65, 354, "PLAYER")
+    c.drawString(65, 194, "COACH")
 
-    c.setFillColor(GREEN)
-    c.setFont("Helvetica-Bold", 11)
-    c.drawString(65, 210, "COACH")
-    c.setFillColor(MID)
-    c.setFont("Helvetica", 9)
-    c.drawString(65, 194, "The person creating the session")
-
-    top = [("1. Discover", "Find the right coach, court and time."),
-           ("2. Hold", "Keep the slot while deciding."),
-           ("3. Book", "Confirm the session in a few taps.")]
-    bottom = [("1. Open a session", "Share a time that is available."),
-              ("2. See demand", "Watch bookings and open seats."),
-              ("3. Coach", "Meet the player with context.")]
-    xs = [215, 465, 715]
-    for i, (head, body) in enumerate(top):
-        flow_box(c, xs[i], 320, 200, 82, head, body, fill=colors.white)
+    top = ["Discover", "Hold", "Book"]
+    bottom = ["Open session", "See demand", "Coach"]
+    xs = [250, 540, 830]
+    for i, label in enumerate(top):
+        flow_box(c, xs[i], 322, 170, 56, label, "", fill=MINT)
         if i < 2:
-            arrow(c, xs[i] + 205, 361, xs[i] + 240, 361)
-    for i, (head, body) in enumerate(bottom):
-        flow_box(c, xs[i], 140, 200, 82, head, body, fill=colors.white)
+            arrow(c, xs[i] + 175, 350, xs[i] + 275, 350)
+    for i, label in enumerate(bottom):
+        flow_box(c, xs[i], 162, 170, 56, label, "", fill=MINT)
         if i < 2:
-            arrow(c, xs[i] + 205, 181, xs[i] + 240, 181)
+            arrow(c, xs[i] + 175, 190, xs[i] + 275, 190)
 
-    rr(c, 1015, 185, 220, 175, GREEN, 22)
-    c.setFillColor(LIME)
-    c.setFont("Helvetica-Bold", 10)
-    c.drawCentredString(1125, 324, "TENNIS LINE")
-    c.setFillColor(colors.white)
-    c.setFont("Helvetica-Bold", 18)
-    c.drawCentredString(1125, 286, "The connection")
-    c.setFillColor(colors.HexColor("#C7D8C9"))
-    c.setFont("Helvetica", 10)
-    c.drawCentredString(1125, 250, "Clear choices")
-    c.drawCentredString(1125, 232, "Simple booking")
-    c.drawCentredString(1125, 214, "Progress that stays")
-    arrow(c, 915, 361, 1005, 300, GREEN)
-    arrow(c, 915, 181, 1005, 245, GREEN)
+    rr(c, 1080, 252, 145, 76, MINT, 14, stroke=GREEN, sw=1.5)
+    c.setFillColor(GREEN)
+    c.setFont("Helvetica-Bold", 12)
+    c.drawCentredString(1152, 292, "TENNIS LINE")
+    c.setFillColor(MID)
+    c.setFont("Helvetica", 8)
+    c.drawCentredString(1152, 276, "connects both")
+    arrow(c, 1005, 350, 1070, 292, GREEN)
+    arrow(c, 1005, 190, 1070, 288, GREEN)
 
+    c.setStrokeColor(GREEN)
+    c.setLineWidth(1.5)
+    c.line(1152, 252, 1152, 225)
     c.setFillColor(GREEN)
     c.setFont("Helvetica-Bold", 11)
-    c.drawString(1015, 148, "Result")
+    c.drawCentredString(1152, 205, "Better court day")
     c.setFillColor(MID)
     c.setFont("Helvetica", 9)
-    c.drawString(1015, 132, "More good sessions.")
-    c.drawString(1015, 118, "Less coordination.")
+    c.drawCentredString(1152, 188, "more play · less admin")
     footer(c, 11)
 
 
