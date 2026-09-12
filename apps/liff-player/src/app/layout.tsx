@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LINE Booking",
-  description: "LINE Mini App booking POC",
+  title: "Tennis Line | Find your next session",
+  description: "A calmer way to find coaches and courts in Bangkok.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
