@@ -328,7 +328,7 @@ def page_close(c):
     c.setFont("Helvetica", 10)
     c.drawString(W - 300, 161, "Player + coach surfaces")
     c.drawString(W - 300, 143, "Responsive · LINE-ready")
-    footer(c, 10)
+    footer(c, 12)
 
 
 def browser_bar(c, x, y, w, route):
@@ -392,6 +392,83 @@ def page_coach_walkthrough(c):
     footer(c, 10, dark=True)
 
 
+def flow_box(c, x, y, w, h, title, body, fill=colors.white, title_color=INK):
+    rr(c, x, y, w, h, fill, 16, stroke=LINE)
+    text(c, title, x + 15, y + h - 22, ParagraphStyle(f"flowtitle{title}", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=15, textColor=title_color), w - 30)
+    text(c, body, x + 15, y + h - 47, ParagraphStyle(f"flowbody{title}", parent=SMALL, textColor=MID), w - 30)
+
+
+def arrow(c, x1, y1, x2, y2, color=colors.HexColor("#A9BBAA")):
+    c.setStrokeColor(color)
+    c.setFillColor(color)
+    c.setLineWidth(2)
+    c.line(x1, y1, x2, y2)
+    c.line(x2 - 8, y2 + 5, x2, y2)
+    c.line(x2 - 8, y2 - 5, x2, y2)
+
+
+def page_simple_workflow(c):
+    c.setFillColor(MINT)
+    c.rect(0, 0, W, H, fill=1, stroke=0)
+    pill(c, "How Tennis Line works", 54, H - 58)
+    text(c, "One simple loop.\nA better court day.", 54, H - 112, TITLE, 500)
+    text(c, "Players find and book. Coaches open and fill. Tennis Line keeps the experience connected.", 58, H - 220, BODY, 570)
+
+    c.setFillColor(GREEN)
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(65, 390, "PLAYER")
+    c.setFillColor(MID)
+    c.setFont("Helvetica", 9)
+    c.drawString(65, 374, "The person looking to play")
+
+    c.setFillColor(GREEN)
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(65, 210, "COACH")
+    c.setFillColor(MID)
+    c.setFont("Helvetica", 9)
+    c.drawString(65, 194, "The person creating the session")
+
+    top = [("1. Discover", "Find the right coach, court and time."),
+           ("2. Hold", "Keep the slot while deciding."),
+           ("3. Book", "Confirm the session in a few taps.")]
+    bottom = [("1. Open a session", "Share a time that is available."),
+              ("2. See demand", "Watch bookings and open seats."),
+              ("3. Coach", "Meet the player with context.")]
+    xs = [215, 465, 715]
+    for i, (head, body) in enumerate(top):
+        flow_box(c, xs[i], 320, 200, 82, head, body, fill=colors.white)
+        if i < 2:
+            arrow(c, xs[i] + 205, 361, xs[i] + 240, 361)
+    for i, (head, body) in enumerate(bottom):
+        flow_box(c, xs[i], 140, 200, 82, head, body, fill=colors.white)
+        if i < 2:
+            arrow(c, xs[i] + 205, 181, xs[i] + 240, 181)
+
+    rr(c, 1015, 185, 220, 175, GREEN, 22)
+    c.setFillColor(LIME)
+    c.setFont("Helvetica-Bold", 10)
+    c.drawCentredString(1125, 324, "TENNIS LINE")
+    c.setFillColor(colors.white)
+    c.setFont("Helvetica-Bold", 18)
+    c.drawCentredString(1125, 286, "The connection")
+    c.setFillColor(colors.HexColor("#C7D8C9"))
+    c.setFont("Helvetica", 10)
+    c.drawCentredString(1125, 250, "Clear choices")
+    c.drawCentredString(1125, 232, "Simple booking")
+    c.drawCentredString(1125, 214, "Progress that stays")
+    arrow(c, 915, 361, 1005, 300, GREEN)
+    arrow(c, 915, 181, 1005, 245, GREEN)
+
+    c.setFillColor(GREEN)
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(1015, 148, "Result")
+    c.setFillColor(MID)
+    c.setFont("Helvetica", 9)
+    c.drawString(1015, 132, "More good sessions.")
+    c.drawString(1015, 118, "Less coordination.")
+    footer(c, 11)
+
+
 def build():
     c = canvas.Canvas(OUT, pagesize=(W, H))
     for page in (
@@ -404,6 +481,7 @@ def build():
         page_demo,
         page_player_walkthrough,
         page_coach_walkthrough,
+        page_simple_workflow,
         page_close,
     ):
         page(c)
