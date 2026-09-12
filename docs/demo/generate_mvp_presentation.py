@@ -49,11 +49,11 @@ def text(c, value, x, y, style=BODY, width=None):
 
 
 def pill(c, label, x, y, fill=LIME, fg=GREEN):
-    width = stringWidth(label, "Helvetica-Bold", 9) + 22
+    width = stringWidth(label, "Helvetica-Bold", 9) + 54
     rr(c, x, y - 15, width, 24, fill, 12)
     c.setFillColor(fg)
     c.setFont("Helvetica-Bold", 9)
-    c.drawString(x + 11, y - 7, label.upper())
+    c.drawString(x + 15, y - 7, label.upper())
     return width
 
 
@@ -184,8 +184,8 @@ def page_player(c):
     c.setFillColor(MINT)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     pill(c, "For players", 54, H - 58)
-    text(c, "Make the next session\nthe easy decision.", 54, H - 112, TITLE, 520)
-    text(c, "A focused marketplace for finding trusted court time, holding a slot and keeping your progress in one place.", 58, H - 220, BODY, 470)
+    text(c, "Make the next session\nthe easy decision.", 54, H - 112, TITLE, 405)
+    text(c, "A focused marketplace for finding trusted court time, holding a slot and keeping your progress in one place.", 58, H - 220, BODY, 385)
     benefits = [("Find the fit", "Coach, surface, location and time — in one view."), ("Hold with confidence", "Keep a good slot while you decide, without losing momentum."), ("Build your story", "Coach notes and focus areas follow you from session to session.")]
     for i, (head, body) in enumerate(benefits):
         y = H - 300 - i * 70
@@ -194,8 +194,8 @@ def page_player(c):
         c.setFillColor(GREEN)
         c.setFont("Helvetica-Bold", 10)
         c.drawCentredString(68, y + 4, str(i + 1))
-        text(c, head, 92, y + 12, ParagraphStyle("benefit", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=16, textColor=INK), 250)
-        text(c, body, 92, y - 8, SMALL, 290)
+        text(c, head, 92, y + 12, ParagraphStyle("benefit", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=16, textColor=INK), 320)
+        text(c, body, 92, y - 8, SMALL, 330)
     mock_phone(c, W - 310, 76)
     footer(c, 3)
 
@@ -204,8 +204,8 @@ def page_coach(c):
     c.setFillColor(GREEN)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     pill(c, "For coaches", 54, H - 58, fill=LIME)
-    text(c, "Turn availability\ninto a healthier week.", 54, H - 112, WHITE_TITLE, 520)
-    text(c, "Tennis Line gives coaches a simple operating layer for demand, sessions and relationships — so every opening has a better chance to fill.", 58, H - 220, ParagraphStyle("darkbody", parent=BODY, textColor=colors.HexColor("#C7D8C9")), 470)
+    text(c, "Turn availability\ninto a healthier week.", 54, H - 112, WHITE_TITLE, 385)
+    text(c, "Tennis Line gives coaches a simple operating layer for demand, sessions and relationships — so every opening has a better chance to fill.", 58, H - 220, ParagraphStyle("darkbody", parent=BODY, textColor=colors.HexColor("#C7D8C9")), 365)
     benefits = [("Fill with signal", "See utilization and open sessions before the week gets away from you."), ("Know your players", "Keep a clear view of returning customers and booking patterns."), ("Stay in your craft", "Less admin overhead. More time coaching the point in front of you.")]
     for i, (head, body) in enumerate(benefits):
         y = H - 300 - i * 70
@@ -214,8 +214,8 @@ def page_coach(c):
         c.setFillColor(GREEN)
         c.setFont("Helvetica-Bold", 10)
         c.drawCentredString(68, y + 4, str(i + 1))
-        text(c, head, 92, y + 12, ParagraphStyle(f"darkbenefit{i}", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=16, textColor=colors.white), 250)
-        text(c, body, 92, y - 8, ParagraphStyle(f"darksmall{i}", parent=SMALL, textColor=colors.HexColor("#C7D8C9")), 290)
+        text(c, head, 92, y + 12, ParagraphStyle(f"darkbenefit{i}", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=16, textColor=colors.white), 330)
+        text(c, body, 92, y - 8, ParagraphStyle(f"darksmall{i}", parent=SMALL, textColor=colors.HexColor("#C7D8C9")), 335)
     mock_dashboard(c, W - 510, 125, 440, 300)
     footer(c, 4, dark=True)
 
@@ -227,16 +227,16 @@ def page_loop(c):
     text(c, "One marketplace.\nTwo sides of a better match.", 54, H - 112, TITLE, 600)
     text(c, "The MVP is designed around a simple promise: make the right session easier to discover, commit to and learn from.", 58, H - 222, BODY, 600)
     nodes = [("1", "Discover", "Player sees a clear, relevant opening."), ("2", "Hold", "A short hold protects intent."), ("3", "Book", "Checkout confirms the court and coach."), ("4", "Improve", "Coach notes make the next session better.")]
-    start_x = 78
+    start_x = 75
     for i, (num, head, body) in enumerate(nodes):
-        x = start_x + i * 280
+        x = start_x + i * 260
         c.setFillColor(LIME if i < 3 else GREEN)
         c.circle(x, 300, 27, fill=1, stroke=0)
         c.setFillColor(GREEN if i < 3 else colors.white)
         c.setFont("Helvetica-Bold", 15)
         c.drawCentredString(x, 295, num)
-        text(c, head, x - 55, 245, ParagraphStyle(f"nodeh{i}", parent=BODY, fontName="Helvetica-Bold", fontSize=16, leading=18, textColor=INK), 160)
-        text(c, body, x - 55, 215, SMALL, 160)
+        text(c, head, x - 55, 245, ParagraphStyle(f"nodeh{i}", parent=BODY, fontName="Helvetica-Bold", fontSize=16, leading=18, textColor=INK), 150)
+        text(c, body, x - 55, 215, SMALL, 150)
         if i < 3:
             c.setStrokeColor(colors.HexColor("#B7C8B9"))
             c.setLineWidth(2)
@@ -278,8 +278,8 @@ def page_demo(c):
     c.setFillColor(GREEN)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     pill(c, "Demo story", 54, H - 58, fill=LIME)
-    text(c, "From “I should play this week”\nto “I’m booked.”", 54, H - 112, WHITE_TITLE, 650)
-    text(c, "A five-minute product walkthrough for player and coach conversations.", 58, H - 220, ParagraphStyle("demobody", parent=BODY, textColor=colors.HexColor("#C7D8C9")), 520)
+    text(c, "From “I should play this week”\nto “I’m booked.”", 54, H - 112, WHITE_TITLE, 440)
+    text(c, "A five-minute product walkthrough for player and coach conversations.", 58, H - 220, ParagraphStyle("demobody", parent=BODY, textColor=colors.HexColor("#C7D8C9")), 420)
     steps = [("01", "Player opens LINE", "A trusted entry point, no new habit to learn."), ("02", "Finds the right session", "The choice is concrete: who, where, when, how much."), ("03", "Holds and checks out", "Intent becomes a confirmed court time."), ("04", "Coach sees a healthier week", "Demand, customers and next actions become visible.")]
     for i, (num, head, body) in enumerate(steps):
         y = 330 - i * 58
@@ -289,9 +289,7 @@ def page_demo(c):
         c.setFillColor(colors.white)
         c.setFont("Helvetica-Bold", 12)
         c.drawString(112, y, head)
-        c.setFillColor(colors.HexColor("#C7D8C9"))
-        c.setFont("Helvetica", 10)
-        c.drawString(112, y - 17, body)
+        text(c, body, 112, y - 7, ParagraphStyle(f"demostep{i}", parent=SMALL, textColor=colors.HexColor("#C7D8C9")), 380)
     rr(c, W - 390, 118, 300, 230, colors.HexColor("#24553D"), 24)
     c.setFillColor(LIME)
     c.setFont("Helvetica-Bold", 34)
