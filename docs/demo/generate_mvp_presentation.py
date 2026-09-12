@@ -328,12 +328,84 @@ def page_close(c):
     c.setFont("Helvetica", 10)
     c.drawString(W - 300, 161, "Player + coach surfaces")
     c.drawString(W - 300, 143, "Responsive · LINE-ready")
-    footer(c, 8)
+    footer(c, 10)
+
+
+def browser_bar(c, x, y, w, route):
+    rr(c, x, y, w, 25, colors.HexColor("#E8EEE7"), 8)
+    for i, color in enumerate([colors.HexColor("#F0C7C2"), colors.HexColor("#EAD8A6"), colors.HexColor("#D8F36A")]):
+        c.setFillColor(color)
+        c.circle(x + 12 + i * 12, y + 12, 3.5, fill=1, stroke=0)
+    c.setFillColor(MID)
+    c.setFont("Helvetica", 8)
+    c.drawString(x + 55, y + 9, route)
+
+
+def walkthrough_step(c, number, title, body, x, y, width, dark=False):
+    accent = LIME
+    fg = colors.white if dark else INK
+    sub = colors.HexColor("#C7D8C9") if dark else MID
+    c.setFillColor(accent)
+    c.circle(x + 12, y - 2, 12, fill=1, stroke=0)
+    c.setFillColor(GREEN)
+    c.setFont("Helvetica-Bold", 10)
+    c.drawCentredString(x + 12, y - 6, str(number))
+    text(c, title, x + 34, y + 9, ParagraphStyle(f"walkhead{number}{x}", parent=BODY, fontName="Helvetica-Bold", fontSize=13, leading=16, textColor=fg), width - 34)
+    text(c, body, x + 34, y - 13, ParagraphStyle(f"walkbody{number}{x}", parent=SMALL, textColor=sub), width - 34)
+
+
+def page_player_walkthrough(c):
+    c.setFillColor(MINT)
+    c.rect(0, 0, W, H, fill=1, stroke=0)
+    pill(c, "Real app walkthrough · player", 54, H - 58)
+    text(c, "From discovery\nto booked court time.", 54, H - 112, TITLE, 430)
+    text(c, "The live MVP route a player follows in the app — using the same screens, actions and language shown in the product.", 58, H - 220, BODY, 395)
+    steps = [
+        ("Open the app", "Start at `/` inside the LINE-ready player surface."),
+        ("Choose a session", "Filter by coach, area, date or surface, then compare clear court cards."),
+        ("Hold the slot", "Tap “Hold slot” to protect intent before checkout."),
+        ("Confirm and keep improving", "Checkout confirms the booking; Sessions and Passport keep the relationship alive."),
+    ]
+    for i, (head, body) in enumerate(steps):
+        walkthrough_step(c, i + 1, head, body, 58, 365 - i * 62, 390)
+    browser_bar(c, W - 390, 470, 310, "localhost:3000/")
+    mock_phone(c, W - 370, 80, 250, 360)
+    footer(c, 9)
+
+
+def page_coach_walkthrough(c):
+    c.setFillColor(GREEN)
+    c.rect(0, 0, W, H, fill=1, stroke=0)
+    pill(c, "Real app walkthrough · coach", 54, H - 58, fill=LIME)
+    text(c, "See the week.\nAct on the signal.", 54, H - 112, WHITE_TITLE, 430)
+    text(c, "The coach flow turns a login into a daily operating rhythm: understand demand, open the next slot and keep relationships warm.", 58, H - 220, ParagraphStyle("coachwalkbody", parent=BODY, textColor=colors.HexColor("#C7D8C9")), 395)
+    steps = [
+        ("Enter the workspace", "Start at `/login` with the coach workspace password."),
+        ("Read the dashboard", "Bookings, active customers, utilization and open sessions are visible at a glance."),
+        ("Take the next action", "Review customers, check reports or open a new session."),
+        ("Keep the calendar healthy", "Create openings, monitor fill rate and remove sessions when plans change."),
+    ]
+    for i, (head, body) in enumerate(steps):
+        walkthrough_step(c, i + 1, head, body, 58, 365 - i * 62, 390, dark=True)
+    browser_bar(c, W - 510, 470, 440, "localhost:3001/")
+    mock_dashboard(c, W - 510, 145, 440, 300)
+    footer(c, 10, dark=True)
 
 
 def build():
     c = canvas.Canvas(OUT, pagesize=(W, H))
-    for page in (page_cover, page_problem, page_player, page_coach, page_loop, page_mvp, page_demo, page_close):
+    for page in (
+        page_cover,
+        page_problem,
+        page_player,
+        page_coach,
+        page_loop,
+        page_mvp,
+        page_demo,
+        page_player_walkthrough,
+        page_coach_walkthrough,
+        page_close,
+    ):
         page(c)
         c.showPage()
     c.save()
