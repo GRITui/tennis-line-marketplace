@@ -1,7 +1,7 @@
 name: Copilot PR gate
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, reopened, synchronize, ready_for_review, review_requested, review_submitted]
   workflow_run:
     workflows: ["CI"]
@@ -16,7 +16,7 @@ jobs:
   request-review:
     name: Request Copilot review
     if: >
-      github.event_name == 'pull_request_target' &&
+      github.event_name == 'pull_request' &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
   merge-when-gated:
     name: Merge when gated
     if: >
-      (github.event_name == 'pull_request_target' &&
+      (github.event_name == 'pull_request' &&
        github.event.pull_request.draft == false) ||
       (github.event_name == 'workflow_run' &&
        github.event.workflow_run.conclusion == 'success')
